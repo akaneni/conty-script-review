@@ -36,10 +36,8 @@ O header `x-actor: brand` ou `x-actor: creator` diz quem age, e a permissão é 
 
 - `due_date` é um dia civil `YYYY-MM-DD`, no fuso da marca. O dia inteiro vale: às 23:59:59.999 de São Paulo o prazo de hoje ainda é aceito.
 - "Hoje" vem de `Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' })`, nunca do corte da string ISO em UTC. Às 21h de SP o UTC já está no dia seguinte, e isso não muda o dia da marca.
-- Prazo anterior a hoje: 422 `prazo já passou`. Data malformada ou inexistente (`2026-02-30`): 400.
+- Prazo anterior a hoje: 422 `prazo já passou` (limite testado: `2026-03-13T02:59:59.999Z` aceita `2026-03-12`, `03:00:00.000Z` dá 422). Data malformada ou inexistente (`2026-02-30`): 400.
 - Prazo vencido sem nova versão não muda o estado. O `GET` mostra `overdue: true` (pedido aberto e hoje em SP maior que `due_date`). O criador ainda pode enviar a versão atrasada.
-
-Teste do limite (relógio fixo): `2026-03-13T02:59:59.999Z` com `due_date=2026-03-12` é aceito; `2026-03-13T03:00:00.000Z` dá 422.
 
 ## Exemplos
 
