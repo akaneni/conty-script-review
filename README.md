@@ -4,7 +4,7 @@ API de revisão de roteiro da Conty. O criador envia o roteiro, a marca pede alt
 
 ## Como rodar
 
-Requer Node 22 ou superior.
+Requer Node 22.13 ou superior (`node:sqlite` sem flag). Só confirmei em Node 24; 22.13 é o mínimo declarado, não testado.
 
 ```bash
 npm install
